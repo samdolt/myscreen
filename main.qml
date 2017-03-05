@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.7
+import QtWebEngine 1.3
 
 ApplicationWindow {
     visible: true
@@ -13,7 +14,6 @@ ApplicationWindow {
         id: video
         anchors.fill: parent
         visible: false
-        //source: "file:///home/samuel/big_buck_bunny.mp4"
 
         playlist: Playlist {
             PlaylistItem { source: "file:///home/samuel/big_buck_bunny.mp4"; }
@@ -23,12 +23,19 @@ ApplicationWindow {
 
     }
 
+    WebEngineView {
+        id: web
+        anchors.fill: parent
+        url: "http://www.qt.io"
+        visible: false
+    }
+
     Page1 {
         id: welcome
         anchors.centerIn: parent
     }
 
-    Timer {
+    /*Timer {
             id: textTimer
             interval: 10000
             repeat: false
@@ -38,7 +45,19 @@ ApplicationWindow {
                 video.play();
                 welcome.visible = false;
                 video.visible = true;
-                //video.play();
+
+            }
+    }*/
+
+    Timer {
+            id: textTimer
+            interval: 5000
+            repeat: false
+            running: true
+            triggeredOnStart: false
+            onTriggered: {
+                welcome.visible = false;
+                web.visible = true;
 
             }
     }
